@@ -1,3 +1,4 @@
+
 struct Matrix:
     var cells: List[List[Bool]]
     var h: Int32
@@ -29,7 +30,9 @@ struct Matrix:
             for x in range(-1, 2):
                 var checkY: Int = h + y
                 var checkX: Int = w + x
-                if y == x == 0 or checkY < 0 or checkX < 0:
+                if y == x == 0:
+                    continue
+                if checkY < 0 or checkX < 0:
                     continue
                 if self.h <= checkY or self.w <= checkX:
                     continue
@@ -69,25 +72,20 @@ struct Matrix:
         print(show)
 
 
-fn main():
+def main():
+
     var matrix: Matrix = Matrix(8, 8)
-    var nMatrix: List[List[Bool]] = List[List[Bool]]()
-    var R0: List[Bool] = List[Bool](0, 0, 0, 0, 0, 0, 0, 0)
-    var R1: List[Bool] = List[Bool](0, 0, 0, 0, 0, 0, 0, 0)
-    var R2: List[Bool] = List[Bool](0, 0, 0, 0, 0, 0, 0, 0)
-    var R3: List[Bool] = List[Bool](0, 0, 0, 1, 1, 1, 0, 0)
-    var R4: List[Bool] = List[Bool](0, 0, 1, 1, 1, 0, 0, 0)
-    var R5: List[Bool] = List[Bool](0, 0, 0, 0, 0, 0, 0, 0)
-    var R6: List[Bool] = List[Bool](0, 0, 0, 0, 0, 0, 0, 0)
-    var R7: List[Bool] = List[Bool](0, 0, 0, 0, 0, 0, 0, 0)
-    nMatrix.append(R0)
-    nMatrix.append(R1)
-    nMatrix.append(R2)
-    nMatrix.append(R3)
-    nMatrix.append(R4)
-    nMatrix.append(R5)
-    nMatrix.append(R6)
-    nMatrix.append(R7)
+    var nMatrix: List[List[Bool]] = List[List[Bool]](
+        List[Bool](0, 0, 0, 0, 0, 0, 0, 0),
+        List[Bool](0, 0, 0, 0, 0, 0, 0, 0),
+        List[Bool](0, 0, 0, 0, 0, 0, 0, 0),
+        List[Bool](0, 0, 0, 1, 1, 1, 0, 0),
+        List[Bool](0, 0, 1, 1, 1, 0, 0, 0),
+        List[Bool](0, 0, 0, 0, 0, 0, 0, 0),
+        List[Bool](0, 0, 0, 0, 0, 0, 0, 0),
+        List[Bool](0, 0, 0, 0, 0, 0, 0, 0),
+        List[Bool](0, 0, 0, 0, 0, 0, 0, 0),
+    )
     matrix.set_matrix(nMatrix)
     matrix.print()
     matrix.next()
