@@ -1,27 +1,28 @@
 
 struct Matrix:
     var cells: List[List[Bool]]
-    var h: Int32
-    var w: Int32
+    var h: Int
+    var w: Int
 
-    fn __init__(inout self, h: Int, w: Int):
+    fn __init__(mut self, h: Int, w: Int):
         self.cells = List[List[Bool]]()
         self.h = h
         self.w = w
         for y in range(self.h):
             self.cells.append(List[Bool]())
             for _ in range(self.w):
+                var b = self.cells[y]
                 self.cells[y].append(False)
 
-    fn __copyinit__(inout self, existing: Self):
+    fn __copyinit__(mut self, existing: Self):
         self.cells = existing.cells
         self.h = existing.h
         self.w = existing.w
 
-    fn set_matrix(inout self, owned cells: List[List[Bool]]):
+    fn set_matrix(mut self, owned cells: List[List[Bool]]):
         self.cells = cells
 
-    fn count_around(inout self, h: Int, w: Int) -> Int:
+    fn count_around(mut self, h: Int, w: Int) -> Int:
         """數周圍的存活數量
         O(3^2).
         """
@@ -40,7 +41,7 @@ struct Matrix:
                     alive = alive + 1
         return alive
 
-    fn next(inout self):
+    fn next(mut self):
         """推算下一代
         O(h*w*(3^2)).
         """
@@ -49,7 +50,7 @@ struct Matrix:
 
         for h in range(self.h):
             for w in range(self.w):
-                alives = self.count_around(h, w)
+                var alives:Int = self.count_around(h, w)
                 # Die if < 2
                 if alives < 2 or alives > 3:
                     new_matrix.cells[h][w] = False
@@ -60,7 +61,7 @@ struct Matrix:
         self = new_matrix
         # 將新的覆蓋回來
 
-    fn print(inout self):
+    fn print(mut self):
         var show: String = ""
         for rows in self.cells:
             for cell in rows[]:
